@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="navbar-brand" href="/">Inicio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/productos/">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about/">Sobre nosotos</a>
+              </li>
+              {% if request.user.is_authenticated and request.user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link" href="/usuarios/">Usuarios</a>
+              </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/productos/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Crear nuevo
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/nuevo_producto/">Producto</a>
+                </div>
+              </li> 
+              {% endif %}  
+            </ul> 
+            <form class="form-inline my-2 my-lg-0" method="GET" action="/buscar/">
+              <input class="form-control mr-sm-2" type="text" name="search" placeholder="Buscar" aria-label="Search">
+              <button class="btn btn-primary" type="submit">Buscar</button>
+            </form>    
+            <ul style="align-items: center;" class="navbar-nav ml-auto">
+              {% if request.user.is_authenticated %}  
+              <li class="nav-item" style="margin-right: 1rem">
+                <img src="{{request.user.usuario_perfil.imagen.url}}" style="height: 2rem;">
+            </li>
+              <li class="nav-item" style="margin-right: 2rem">
+              <h5 style="color:white">{{request.user.username}}</h5>
+          </li>
+          <li class="nav-item">
+            <a href="/editar-usuario-perfil/{{request.user.usuario_perfil.id}}/" style="border-radius: 40rem" class="btn btn-primary">Editar usuario</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary rounded-3" href="/logout/">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+              <a class="btn btn-primary mx-2 rounded-3  " href="/login/">Login</a>
+          </li>
+          <li class="nav-item">
+           <a class="btn btn-primary rounded-3" href="/registrarse/">Register</a>
+          </li>
+          {% endif %}
+        </ul>
+        </div>
+      </nav>
+
+      {% block titulo %}
+    
+      {% endblock %}
+
+  <div class="d-flex" style="margin-bottom:5rem; justify-content: space-evenly;">
+    {% block contenido %}
+    
+    {% endblock %}
+  </div>
+  {% block titulo2 %}
+    
+  {% endblock %}
+    {% block contenido2 %}
+    
+    {% endblock %}
+ 
+
+    <!-- Footer -->
+<footer class="text-center text-lg-start bg-dark text-muted">
+  <!-- Section: Links  -->
+  <section class="p-1">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Proyecto Python 
+          </h6>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quas, nam necessitatibus quidem, quo voluptas rem, voluptates odit consequatur totam in itaque ea illum porro repellat modi a quos laborum!
+          </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Contacto
+          </h6>
+          <p><i class="fas fa-home me-3"></i> Buenos Aires, Argentina</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i> info@example.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i>  00000  </p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+
+</footer>
+<!-- Footer -->
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+</html>

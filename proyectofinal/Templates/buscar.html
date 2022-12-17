@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+ {% for buscar_producto in buscar_productos %}
+    <div class="card" style="width: 18rem">
+      <img src="{{product.imagen.url}}" class="card-img-top" >
+      <div class="card-body">
+        <h5 class="card-title">{{buscar_producto.nombre}}</h5>
+        <p class="card-text">${{buscar_producto.precio}}</p>
+        <p class="card-text">{{buscar_producto.sku}}</p>
+        {% if request.user.is_authenticated and request.user.is_superuser %}
+        <a href="/detalle-productos/{{product.id}}/" class="btn btn-primary">Detalle</a>
+      {% else %}
+        <a href="#" class="btn btn-primary">Comprar</a>
+    {% endif %}
+      </div>
+    </div>
+ {% endfor %}
+{% endblock %}

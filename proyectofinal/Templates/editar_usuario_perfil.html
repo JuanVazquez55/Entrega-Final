@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    <h1 style="text-align:center">Complete los campos a actualizar</h1>
+{% endblock %}
+
+{% block contenido %}
+        <form class="d-flex flex-column" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <img style="max-width: 250px;" src="{{object.imagen.url}}" class="card-img-top" >
+            <table>
+                {{form.as_table}}  
+            </table>
+            <button class="mb-1 mt-1 mr-auto btn btn-primary"><a style="color:rgb(255, 255, 255)" href="/editar-usuario/{{object.id}}/">Modificar usuario<a href=""></a></a></button>
+            <input style="margin:0.25rem auto 1rem 0" class="btn btn-primary" type="submit" , value="Enviar">
+        </form>
+{% endblock %}

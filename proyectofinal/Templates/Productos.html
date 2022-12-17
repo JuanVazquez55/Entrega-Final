@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    <h1 style="text-align:center">Productos</h1>
+{% endblock %}
+
+{% block contenido %}
+ {% for product in productos %}
+  {% if product.stock == True %}
+
+    <div class="card" style="width: 18rem">
+      <img src="{{product.imagen.url}}" class="card-img-top" >
+      <div class="card-body">
+        <h5 class="card-title">{{product.nombre}}</h5>
+        <p class="card-text">${{product.precio}}</p>
+        <p class="card-text">{{product.sku}}</p>
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+        <a href="/detalle-productos/{{product.id}}/" class="btn btn-primary">Detalle</a>
+      {% else %}
+        <a href="#" class="btn btn-primary">Comprar</a>
+    {% endif %}
+      </div>
+    </div>
+
+  {% endif %}
+ {% endfor %}
+{% endblock %}

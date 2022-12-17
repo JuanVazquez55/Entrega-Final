@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+{% for modificacion in modificacionesinicio %}
+  <div class="container card mb-3 ">
+    <div class="row no-gutters">
+      <div class="col-md-6">
+        <img class="img-fluid m-100" src="{{modificacion.banner.url}}">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <h5 class="card-title">{{modificacion.titulo}}</h5>
+          <p class="card-text">{{modificacion.descripcion}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+{% endblock %}
+
+{% block contenido %}
+ {{errors}}
+ {% for product in productos %}
+  {% if product.stock == True %}
+
+  <div class="card" style="width: 18rem">
+    <img src="{{product.imagen.url}}" class="card-img-top" >
+    <div class="card-body">
+      <h5 class="card-title">{{product.nombre}}</h5>
+      <p class="card-text">${{product.precio}}</p>
+      <p class="card-text">{{product.sku}}</p>
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+        <a href="/detalle-productos/{{product.id}}/" class="btn btn-primary">Detalle</a>
+      {% else %}
+        <a href="#" class="btn btn-primary">Comprar</a>
+    {% endif %}
+    </div>
+  </div>
+  {% endif %}
+ {% endfor %}
+{% endblock %}
+  
+{% block contenido2 %}
+<div class="section" style="margin-bottom:5rem">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        {% for descripciones in descripcion %}
+        <div class="media-list">
+          <div>
+            <img class="rounded-circle" style="width: 40px;" src="{{descripciones.imagen}}">
+            <div class="media-body">
+              <div class="d-flex small">
+                 <b>{{descripciones.usuario}}</b>
+                 <div style="margin-left: 1rem;"><i class="fa-solid fa-star"></i>{{descripciones.puntuacion}}</div>
+              </div>
+              <p>{{descripciones.comentario}}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% if form %}
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+              {{form}}
+          </div>
+          <button class="btn btn-primary btn-block my-4" type="submit">Comentar</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+ 
+{% endblock %}
+
+{% block titulo2 %}
+    <h2 id="comentarios" style="text-align:center">Deja un comentario</h2>
+{% endblock %}
+
+
+

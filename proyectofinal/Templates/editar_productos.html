@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    <h1 style="text-align:center">Complete los campos a actualizar</h1>
+{% endblock %}
+
+{% block contenido %}
+    {% if form %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            <input class="btn btn-primary" type="submit" , value="Enviar">
+        </form>
+    {% endif %}
+
+{% endblock %}
