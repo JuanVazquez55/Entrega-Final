@@ -37,8 +37,7 @@ Realizado por Sebastián
 
  El documento se deja vacio para que el tutor lo use y agregue items
 
- IMPORTANT: El usuario administrador es
-
- administrador
- Proyecto
+ IMPORTANT: El usuario es: administrador  
+ la contraseña es: Proyecto
+ 
  
